@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch } from "react"
+import { accionesPropinas } from "../reducers/order-reducer"
 type PropinasFromProps = {
-  setPropina: Dispatch<SetStateAction<number>>,
   propina: number
+  dispatch: Dispatch<accionesPropinas>,
 }
-export default function PropinasForm({ setPropina, propina }: PropinasFromProps) {
+export default function PropinasForm({ propina, dispatch }: PropinasFromProps) {
 
   const opcionesPorcentaaje = [
     {
@@ -37,7 +38,7 @@ export default function PropinasForm({ setPropina, propina }: PropinasFromProps)
               type="radio"
               name="tip"
               value={tip.value}
-              onChange={e => setPropina(+e.target.value)}
+              onChange={e => dispatch({ type: 'porcentaje-propina', payload: { value: +e.target.value } })}
               checked={tip.value === propina}
             />
           </div>
