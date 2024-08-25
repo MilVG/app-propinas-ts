@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <header className="flex flex-row justify-center justify-items-center bg-gradient-to-r from-indigo-500">
-        <h1 className=" text-6xl font-honk m-3">Cotizador de Propinas</h1>
+        <h1 className=" text-6xl font-honk m-3">Cotizador de Propinas Version-1</h1>
       </header>
 
       <main className="grid md:grid-cols-2 mt-10">
