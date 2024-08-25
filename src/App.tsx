@@ -1,15 +1,14 @@
 import { dataItems } from "./data/db"
 import Launchitems from "./components/Launchitems"
-import useOrder from "./hooks/userOrder"
 import OrderContents from "./components/OrdersContents"
 import OrderTotals from "./components/OrderTotals"
 import PropinasForm from "./components/PropinasForm"
+import { useReducer } from "react"
+import { initialState, orderReducer } from "./reducers/order-reducer"
+
 function App() {
 
-  const { additem, order, deleteItem, propina, setPropina, guardarOrder } = useOrder()
-
-  console.log(propina);
-
+  const [state, dispatch] = useReducer(orderReducer, initialState)
   return (
     <>
       <header className="flex flex-row justify-center justify-items-center bg-gradient-to-r from-indigo-500">
@@ -24,7 +23,7 @@ function App() {
               <Launchitems
                 key={item.id}
                 item={item}
-                additem={additem}
+                dispatch={dispatch}
               />
             ))
           }
@@ -34,19 +33,19 @@ function App() {
           <h1 className="text-center text-2xl font-bold">Consumo</h1>
           <div className="flex flex-col space-y-5 " >
             <OrderContents
-              order={order}
-              deleteItem={deleteItem}
+              order={state.order}
+              dispatch={dispatch}
             />
             <hr />
             <PropinasForm
-              setPropina={setPropina}
-              propina={propina}
+              propina={state.propina}
+              dispatch={dispatch}
             />
             <hr />
             <OrderTotals
-              order={order}
-              propina={propina}
-              guardarOrder={guardarOrder}
+              order={state.order}
+              propina={state.propina}
+              dispatch={dispatch}
             />
           </div>
         </div>
