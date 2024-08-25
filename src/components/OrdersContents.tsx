@@ -1,12 +1,14 @@
 
+import { Dispatch } from "react"
 import { formatCurrency } from "../helpers"
-import { lunchOrder, itemsLunch } from "../types"
+import { lunchOrder } from "../types"
+import { accionesPropinas } from "../reducers/order-reducer"
 
 type OrderContentsProps = {
   order: lunchOrder[],
-  deleteItem: (id: itemsLunch['id']) => void
+  dispatch: Dispatch<accionesPropinas>
 }
-export default function OrderContents({ order, deleteItem }: OrderContentsProps) {
+export default function OrderContents({ order, dispatch }: OrderContentsProps) {
 
   return (
     <div>
@@ -26,7 +28,7 @@ export default function OrderContents({ order, deleteItem }: OrderContentsProps)
               </div>
               <div className="bg-red-100- w-1/5 flex flex-row justify-center justify-items-center">
                 <button
-                  onClick={() => deleteItem(item.id)}
+                  onClick={() => dispatch({ type: 'eliminar-item', payload: { id: item.id } })}
                   className="bg-purple-400 w-8 m-3 rounded-lg text-xl font-bold hover:bg-purple-600">x</button>
               </div>
             </div>
