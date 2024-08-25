@@ -1,17 +1,20 @@
+import { Dispatch } from "react"
 import { itemsLunch } from "../types"
+import { accionesPropinas } from "../reducers/order-reducer"
 
 type lauchProps = {
   item: itemsLunch,
-  additem: (item: itemsLunch) => void
+  dispatch: Dispatch<accionesPropinas>
 }
 
-export default function Lauchitems({ item, additem }: lauchProps) {
+export default function Lauchitems({ item, dispatch }: lauchProps) {
 
   const { name, price, description } = item
+
   return (
     <>
       <button
-        onClick={() => additem(item)}
+        onClick={() => dispatch({ type: 'añadir-propinas', payload: { item: item } })}
         className="flex flex-row justify-between mx-auto my-2 bg-blue-200 hover:bg-blue-400 rounded-2xl">
         <div className="grid grid-cols-1 h-30 w-80 justify-items-start justify-start px-4 py-4">
           <h1 className="text-blue-500 text-xl font-bold">{name}</h1>
